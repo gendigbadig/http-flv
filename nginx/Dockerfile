@@ -42,7 +42,8 @@ RUN CONFIG="\
     && strip /usr/lib/nginx/modules/ngx_http_lua_module.so \
     && strip /usr/lib/nginx/modules/ndk_http_module.so \
     && rm -rf /usr/src/nginx-$NGINX_VERSION /usr/src/nginx-http-flv-module-$NGINX_HTTP_FLV_MODULE_VERSION /usr/src/lua-nginx-module-$NGINX_LUA_MODULE_VERSION /usr/src/ngx_devel_kit-$NGINX_NGX_DEVEL_MODULE_VERSION \
-    && apk del .build-deps
+    && apk del .build-deps \
+    && apk install luajit-dev
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY conf.d/ /etc/nginx/conf.d/
