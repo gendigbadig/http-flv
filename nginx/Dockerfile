@@ -4,8 +4,8 @@ ENV NGINX_HTTP_FLV_MODULE_VERSION 1.2.6
 ENV NGINX_NGX_DEVEL_MODULE_VERSION 0.3.1
 ENV NGINX_LUA_MODULE_VERSION 0.10.15
 
-ENV LUAJIT_LIB=/usr/lib
-ENV LUAJIT_INC=/usr/include/luajit-2.1.0
+# ENV LUAJIT_LIB=/usr/lib
+# ENV LUAJIT_INC=/usr/include/luajit-2.1.0
 
 RUN CONFIG="\
     --prefix=/etc/nginx \
