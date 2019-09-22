@@ -39,7 +39,7 @@ RUN CONFIG="\
     && cp objs/ngx_http_flv_live_module.so /usr/lib/nginx/modules \
     && strip /usr/lib/nginx/modules/ngx_http_flv_live_module.so \
     && rm -rf /usr/src/nginx-$NGINX_VERSION /usr/src/nginx-http-flv-module-$NGINX_HTTP_FLV_MODULE_VERSION \
-    && /bin/sh -c "envsubset < /etc/nginx/conf.d/rtmp/rtmp.template > /etc/nginx/conf.d/rtmp/rtmp.conf" \
+    && /bin/sh -c "envsubst < /etc/nginx/conf.d/rtmp/rtmp.template > /etc/nginx/conf.d/rtmp/rtmp.conf" \
     && apk del .build-deps 
 
 COPY www/ /var/www/
