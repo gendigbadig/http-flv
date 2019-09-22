@@ -46,4 +46,4 @@ COPY www/ /var/www/
 
 EXPOSE 80 1935
 
-ENTRYPOINT [ "/bin/sh -c \"envsubst < /etc/nginx/conf.d/rtmp/rtmp.template > /etc/nginx/conf.d/rtmp/rtmp.conf\" && nginx -g \"daemon off;\"" ]
+CMD [ "/bin/sh", "-c", "envsubst < /etc/nginx/conf.d/rtmp/rtmp.template > /etc/nginx/conf.d/rtmp/rtmp.conf", "&&", "nginx", "-g", "daemon off;" ]
