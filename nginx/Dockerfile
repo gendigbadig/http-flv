@@ -29,7 +29,7 @@ RUN CONFIG="\
     && unzip nginx-ngx-devel-module.zip -q -d /usr/src \
     && rm nginx.tar.gz nginx-http-flv-module.zip nginx-lua-module.zip nginx-ngx-devel-module.zip \
     && cd /usr/src/nginx-$NGINX_VERSION \
-    && ./configure $CONFIG --add-dynamic-module=/usr/src/nginx-http-flv-module-$NGINX_HTTP_FLV_MODULE_VERSION --add-dynamic-module=/usr/src/nginx-http-flv-module-$NGINX_LUA_MODULE_VERSION --add-dynamic-module=/usr/src/nginx-ngx-devel-module-$NGINX_NGX_DEVEL_MODULE_VERSION \
+    && ./configure $CONFIG --add-dynamic-module=/usr/src/nginx-http-flv-module-$NGINX_HTTP_FLV_MODULE_VERSION --add-dynamic-module=/usr/src/nginx-lua-module-$NGINX_LUA_MODULE_VERSION --add-dynamic-module=/usr/src/nginx-ngx-devel-module-$NGINX_NGX_DEVEL_MODULE_VERSION \
     && make modules \
     && cp /usr/src/nginx-http-flv-module-$NGINX_HTTP_FLV_MODULE_VERSION/stat.xsl /var/www \
     && cp objs/ngx_http_flv_live_module.so /usr/lib/nginx/modules \
@@ -38,7 +38,7 @@ RUN CONFIG="\
     && strip /usr/lib/nginx/modules/ngx_http_flv_live_module.so \
     && strip /usr/lib/nginx/modules/ngx_http_lua_module.so \
     && strip /usr/lib/nginx/modules/ndk_http_module.so \
-    && rm -rf /usr/src/nginx-$NGINX_VERSION /usr/src/nginx-http-flv-module-$NGINX_HTTP_FLV_MODULE_VERSION /usr/src/nginx-http-flv-module-$NGINX_LUA_MODULE_VERSION /usr/src/nginx-ngx-devel-module-$NGINX_NGX_DEVEL_MODULE_VERSION \
+    && rm -rf /usr/src/nginx-$NGINX_VERSION /usr/src/nginx-http-flv-module-$NGINX_HTTP_FLV_MODULE_VERSION /usr/src/nginx-lua-module-$NGINX_LUA_MODULE_VERSION /usr/src/nginx-ngx-devel-module-$NGINX_NGX_DEVEL_MODULE_VERSION \
     && apk del .build-deps
 
 COPY nginx.conf /etc/nginx/nginx.conf
