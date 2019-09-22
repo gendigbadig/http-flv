@@ -46,4 +46,4 @@ COPY www/ /var/www/
 
 EXPOSE 80 1935
 
-CMD [ "/bin/sh", "-c", "envsubst < /etc/nginx/conf.d/rtmp/rtmp.template > /etc/nginx/conf.d/rtmp/rtmp.conf", "&&", "nginx", "-g", "daemon off;" ]
+CMD [ "/bin/sh", "-c", "/usr/local/bin/envsubst '$$RTMP_PULL' < /etc/nginx/conf.d/rtmp/rtmp.template > /etc/nginx/conf.d/rtmp/rtmp.conf && /usr/sbin/nginx -g 'daemon off;'" ]
