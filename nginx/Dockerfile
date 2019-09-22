@@ -26,7 +26,7 @@ RUN CONFIG="\
     --group=nginx \
     --with-compat \
     " \
-    && apk add --no-cache --virtual .build-deps gcc libc-dev make zlib-dev openssl-dev pcre-dev curl gettext \
+    && apk add --no-cache --virtual .build-deps gcc libc-dev make zlib-dev openssl-dev pcre-dev curl \
     && curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o nginx.tar.gz \
     && curl -fSL https://github.com/winshining/nginx-http-flv-module/archive/v$NGINX_HTTP_FLV_MODULE_VERSION.zip -o nginx-http-flv-module.zip \
     && tar -zxC /usr/src -f nginx.tar.gz \
@@ -39,9 +39,11 @@ RUN CONFIG="\
     && cp objs/ngx_http_flv_live_module.so /usr/lib/nginx/modules \
     && strip /usr/lib/nginx/modules/ngx_http_flv_live_module.so \
     && rm -rf /usr/src/nginx-$NGINX_VERSION /usr/src/nginx-http-flv-module-$NGINX_HTTP_FLV_MODULE_VERSION \
-    && /bin/sh -c "envsubst < /etc/nginx/conf.d/rtmp/rtmp.template > /etc/nginx/conf.d/rtmp/rtmp.conf" \
-    && apk del .build-deps 
+    && apk del .build-deps \
+    && apk add gettext
 
 COPY www/ /var/www/
 
 EXPOSE 80 1935
+
+ENTRYPOINT [ "/bin/sh -c \"envsubst < /etc/nginx/conf.d/rtmp/rtmp.template > /etc/nginx/conf.d/rtmp/rtmp.conf\" && nginx -g \"daemon off;\"" ]
