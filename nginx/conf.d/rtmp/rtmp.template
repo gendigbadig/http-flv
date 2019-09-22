@@ -1,0 +1,41 @@
+# lua_package_path       "/usr/lib/lua/?.lua;;";
+
+server {
+    # set_by_lua $nginx_pull_rtmp 'return os.getenv("NGINX_PULL_RTMP")';
+    listen              1935;
+    timeout             15s;
+    drop_idle_publisher 15s;
+
+    application demo {
+        live            on;
+        gop_cache       on;
+
+    }
+
+    application hls {
+        live            on;
+        hls             on;
+        gop_cache       on;
+        hls_path        /tmp/hls;
+
+        hls_playlist_length 4s;
+        hls_fragment 1s;
+    }
+
+    application hlsrelay {
+        live            on;
+        hls             on;
+        gop_cache       on;
+        pull            rtmp://${RTMP_PULL}/hls/$name;
+        hls_path        /tmp/hlsrelay;
+
+        hls_playlist_length 4s;
+        hls_fragment 1s;
+    }
+
+    application dash {
+        live            on;
+        dash            on;
+        dash_path       /tmp/dash;
+    }
+}
