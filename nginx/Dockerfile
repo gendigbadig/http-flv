@@ -4,6 +4,9 @@ ENV NGINX_HTTP_FLV_MODULE_VERSION 1.2.6
 ENV NGINX_NGX_DEVEL_MODULE_VERSION 0.3.1
 ENV NGINX_LUA_MODULE_VERSION 0.10.15
 
+ENV LUAJIT_LIB=/usr/lib
+ENV LUAJIT_INC=/usr/include/luajit-2.0
+
 RUN CONFIG="\
     --prefix=/etc/nginx \
     --sbin-path=/usr/sbin/nginx \
@@ -17,7 +20,7 @@ RUN CONFIG="\
     --group=nginx \
     --with-compat \
     " \
-    && apk add --no-cache --virtual .build-deps gcc libc-dev make zlib-dev openssl-dev pcre-dev curl luajit \
+    && apk add --no-cache --virtual .build-deps gcc libc-dev make zlib-dev openssl-dev pcre-dev curl luajit-dev \
     && curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o nginx.tar.gz \
     && curl -fSL https://github.com/winshining/nginx-http-flv-module/archive/v$NGINX_HTTP_FLV_MODULE_VERSION.zip -o nginx-http-flv-module.zip \
     && curl -fSL https://github.com/simplresty/ngx_devel_kit/archive/v$NGINX_NGX_DEVEL_MODULE_VERSION.zip -o ngx_devel_kit.zip \
